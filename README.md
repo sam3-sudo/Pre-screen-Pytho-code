@@ -1,8 +1,18 @@
-terraform_remote_state_bucket_name="silverton-tf-state-851725592494-us-east-1"
-terraform_remote_state_bucket_key_prefix="supp-benefits-services/dev"
-vpc_cidr        = ["100.124.0.0/16"]
+provider "aws" {
+  region = "us-east-1"
+}
 
-do not hardcode this. Redis should be provisioned in "routable " subnet similar to documentDB.
-please change this
+provider "aws" {
+  alias  = "crr"
+  region = "us-west-1"
+}
 
-vpc                                    = data.terraform_remote_state.vpc.outputs.vpc
+terraform {
+  backend "s3" {
+    region = "us-east-1"
+  }
+  required_version = ">= 1.5.7"
+  required_providers {
+    aws = "~> 4.67.0"
+  }
+}
