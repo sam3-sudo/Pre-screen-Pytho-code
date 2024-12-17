@@ -16,3 +16,10 @@ terraform {
     aws = "~> 4.67.0"
   }
 }
+
+
+
+  region = "us-east-1"
+}
+
+provider "aws" {
